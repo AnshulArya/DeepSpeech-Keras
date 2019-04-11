@@ -1,0 +1,116 @@
+
+Tomek:
+- decoding: word + char level based (ngrams)
+- decoding: using BERT
+- decoding: spelling correction
+
+
+
+tasks:
+- chapter 1: introduction
+- chapter 2: data
+- chapter 3: models (without any external language model)
+- doc: 3.1 chapter: baseline
+- doc: 3.2 chapter: interpretation FC weights -> new CNN (PCA curve)
+- doc: 3.3 chapter: stacked lstms
+  * earlier lstm should have quicker/bigger changes
+- doc: 3.4 chapter: Stacked RNN layers and projection between (change vector in each step require less information - proof)
+  * calculate difference between vectors between layers and PCA
+- chapter 4: decoder - lanugage model
+- chapter 5: evaluation results
+  (addapt model size)
+- chapter 6: transfer learning
+  (transfer to Clarin)
+
+
+
+
+
+- script: (for evaluation set clarin and jurisdic) normalized dot product
+  between lstm avtivations and char embeddings (clusters) -> softmax -> calculate metrics
+  https://stackoverflow.com/questions/51003027/computing-cosine-similarity-between-two-tensors-in-keras
+  keras.layers.Dot(axes, normalize=True)
+
+- char embdeddings:
+    - train char embeddings of the sequence up to 7 words context
+      (embeddings should have similar properties/relation as cluster activations)
+    - dot product (lstm output, char embeddings) -> softmax
+    - fast text tri-grams
+
+- extended cost function
+  add additional alligmnet which can be decoded using external decoder to correct alligments
+  * start with simple "u" and "ó" case
+
+
+
+
+
+
+
+
+
+
+
+
+backlog:
+- model size effect: change size 50 - 75 - 100M parameters
+- inspect why clarin prediction is much worst
+- finetune learned model to Clarin-PL
+- spell words with `rz` and `ż` x10 and check where activation is different
+- understand model: LSTM wegihts trajectory
+- package: create deepspeech-keras package
+- save weights: put pretrained models to server
+- callback: weights update
+- test: pytest order manage
+- how strides (window size) change impact on prediction density of prediction matrix
+- clean environment files (delete unnecessary) + add dataclasses
+- interactive plotting (zoom-in ect): bokeh vs plotly
+- segmentacja próbek przyjaciół
+- bigger dev jurisdic set
+- understand model: cluster FC activations -> clusters are more informative in following layers?
+- change CNN to small FC + LSTM
+- different languages support -> en / fr / de + banchmarks
+- combine spectrogram and predicted probabilities and create mean spectrogram for the each letter (listen audio files) (cluster letters spectrogram's)
+- trian uploaded model with batch normalization on the input layer (no need to normalize features)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+done:
+- new exp: modified CNN + RNN x3 (between projection)
+- send evaluation dataset
+- new exp: modified CNN + RNN x3
+- new exp: modified CNN + 2FC + RNN (2048)
+- new exp: modified CNN + RNN (2048)
+- understand model: first layer weights -> set new CNN size
+- doc: 3.1 chapter data
+- understand what mfcc means
+- save results after each epoch
+- evaluation: create evaluation pipeline + tests
+- jurisdric dev: divide (1000 utters) + features + features-norm (clarin dev size)
+- features test: findout big bug (take only first phrase)
+- ReduceLROnPlateau 1E-3 -> 1E-4 -> 1E-5
+- check: shuffle between epochs
+- evaluation: save all activations at each step in hdf5 file
+- search strategy (dim: lr / batch_size); run 10 times 1epoch run to set good random seed
+- create random seed
+- create features_norm script
+- create features_eda (check features)
+- do features test
+- save features in hdf5
+- deployment scripts (bash tutorial)
+- create features from a scratch (+ normalization) +info dict
+- clean-up old models into cloudlab1 marked by date
+- test save best weights
+- app: configuration paths
+

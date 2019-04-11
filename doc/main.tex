@@ -1,0 +1,106 @@
+\documentclass{report}
+\usepackage{import}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+
+% Import biblioteki
+% \usepackage{biblatex}
+\usepackage{csquotes}                   % warning:
+\DeclareQuoteAlias{english}{polish}     % no polish support
+\usepackage[
+    backend=biber, 
+    style=numeric,
+    sorting=ynt,
+    minbibnames=5,
+    maxbibnames=5]{biblatex}
+\addbibresource{references/main.bib}
+\addbibresource{references/online.bib}
+\addbibresource{references/others.bib}
+
+% Linkowanie (\usepackage{url})
+\usepackage{hyperref}
+\hypersetup{    
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,
+    citecolor=cyan,
+    urlcolor=cyan,
+}
+\usepackage[acronym,nonumberlist]{glossaries}
+
+% Używanie cytatów \say
+\usepackage{dirtytalk}
+
+% Math fonts
+\usepackage{amsfonts}
+
+\usepackage{graphicx}
+\usepackage[left=4cm,right=4cm,top=2cm,bottom=3cm]{geometry}
+\graphicspath{{figures/}}
+
+\title{ \bf Praca Magisterska}
+\author{Rafał Rolczyński}
+\date{Warszawa, Wrzesień 2018}
+
+\makeglossaries
+\newacronym{hmm}{HMM}{Hidden Markov Model}
+\newacronym{asr}{ASR}{Automatic Speech Recognition}
+\newacronym{ann}{ANN}{Artificial Neural Network}
+\newacronym{dnn}{DNN}{Deep Neural Network}
+\newacronym{rnn}{RNN}{Recurrent Neural Network}
+\newacronym{cnn}{CNN}{Convolutional Neural Network}
+\newacronym{fnn}{FNN}{Feedforward Neural Network}
+\newacronym{fc}{FC}{Fully Connected}
+\newacronym{lstm}{LSTM}{Long short-term memory}
+\newacronym{mse}{MSE}{Mean Squared Error}
+\newacronym{ols}{OLS}{Ordinary Least Squares}
+\newacronym{ctc}{CTC}{Connectionist Temporal Classification}
+
+\begin{document}
+%\begin{titlepage}
+%	\centering
+%	\includegraphics[width=\linewidth]{pja}\par
+%	\vspace{1.5cm}
+%	{\large \bfseries Wydział Informatyki \\}
+%	\vspace{1.5cm}
+%	{\large \bfseries Katedra Multimediów \\}
+%	{\large Interakcja człowiek-komputer \par}
+%	\vspace{1.5cm}
+%	{\large\bfseries Rafał Rolczyński\\}
+%	{\large Nr albumu 15497\\}
+%	\vspace{2.5cm}
+%	{\Huge\itshape Praca Magisterska \par}
+%	\vspace{3cm}
+%	\begin{flushright}
+%	\large
+%	Praca magisterska\\
+%    Prof. dr hab. Krzysztof Marasek
+%    \end{flushright}
+%    \vspace{2cm}
+%	{\large Warszawa, \today\par}
+%\end{titlepage}
+%
+%\input{abstract}
+%\tableofcontents
+%\printglossary[type=\acronymtype]
+%\printglossary
+
+%\chapter{Wprowadzenie}
+\import{chapters/3.2/}{chapter.tex}
+%
+%\chapter{Deep Neural Network}
+%\import{chapters/}{chapter02.tex}
+%
+%\chapter{Eksperymenty}
+%\import{chapters/}{chapter03.tex}
+
+% \input{chapter02}
+% \input{chapter03}
+% \input{chapter04}
+% \input{chapter05}
+% \input{chapter06}
+
+%\printbibliography
+\end{document}

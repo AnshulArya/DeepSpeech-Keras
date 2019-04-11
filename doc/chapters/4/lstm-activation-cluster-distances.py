@@ -1,5 +1,8 @@
 import os
+import pickle
+import operator
 from collections import defaultdict
+from functools import reduce
 
 import h5py
 import pandas as pd
@@ -14,6 +17,11 @@ from text import Alphabet
 
 cache_dir = os.path.join(os.path.dirname(__file__), 'cachedir')
 memory = Memory(cache_dir, verbose=0)
+
+
+def dump_session(data):
+    with open(f'{__file__}.session', 'wb') as file:
+        pickle.dump(data, file)
 
 
 def add_vectors(softmax, lstm, clusters):
@@ -53,6 +61,8 @@ def calculate_clusters():
 def main():
     alphabet = Alphabet('tests/models/test/alphabet.txt')
     clusters, cluster_means = calculate_clusters()
+    cluster_activations = reduce(operator.add, (v for k, v in clusters.items()))
+    dump_session(cluster_activations)
 
     df = pd.DataFrame(cluster_means)
     df = df.reindex(sorted(df.columns), axis=1)

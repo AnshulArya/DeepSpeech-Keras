@@ -1,0 +1,39 @@
+
+\section{Model języka}
+
+%Dzisiaj po rozmowie z marcinem dot wpięcia modelu językowego
+Ostatnia warstwa softmax rzutuję wektor aktywacji LSTM na przestrzeń 36 wymiarów, czyli
+liczbę znaków w alfabecie.
+Wagi warstwy softmax można bezpośrednio interpretować jako wektory reprezentujące kolejne litery (embedding'i).
+Odległości pomiędzy embedding'ami liter są przedstawione w macierzy dystansów poniżej.
+W macierzy dystansów widać podstawowe zależności językowe.
+W ogólności litery podzieliły się na grupę samogłosek i grupę spółgłosek, np.
+litery \textit{e} i \textit{u} mają podobne zależności względem spółgosek \textit{k, l, ł, m} itd.
+Widać również characterystyczne cechy pojedycznych liter np.
+litera \textit{c} jest blisko litery \textit{h}, ponieważ litery często tworzą dwuznak \textit{ch}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{distances.png}
+    \caption{Macierze dystansów między wektorami reprezentującymi litery.}
+    \label{fig:distances}
+\end{figure}
+
+Istnieje inny sposób na stworzenie embedding'ów liter.
+Po ewaluacji modelu są wybrane próbki, dla których model ma w pełni poprawną predykcję.
+Następnie zebrane są w grupy aktywacje warstwy LSTM dla których predykcja pojedynczej
+litery jest silna (prawdopodobieństwo powyżej 0.95).
+Średnie wektory grupy aktywacji pojedynczej litery tworzą embedding'i liter.
+Na rysunku \ref{fig:distances} widać, że macierz dystansów posiada więcej zależności językowych, co
+potwierdza krzywa \textit{cumulative variance}.
+Pierwsze 36 komponentów (co odpowiada softmax embeddings) zawiera wyłącznie 25\% informacji.
+
+
+
+
+
+- usunąć niewykorzystane litery w softmax
+- jeden plik tworzący wykresy
+
+
+- Warstwa LSTM ma stałe parametry gate'ów podczas pojedynczego przejścia.
